@@ -29,7 +29,7 @@ const getAUserProfile = (pincod, date) => {
       console.log("No:Of Centers" + typeof result.centers.length);
       if (result.centers.length === 0) {
         console.log("no dAta AvaiL");
-        na.innerText = `No Slots Available For ${pin} At ${date} `;
+        na.innerText = `No Slots Available For ${pin} At ${date} Please Select Other Date's `;
       }
       for (let x = 0; x < result.centers.length; x++) {
         const name_up = result.centers[x].name;
@@ -191,8 +191,7 @@ datepic.addEventListener("input", function () {
     var modified_date = `${date_spli[2]}-${date_spli[1]}-${date_spli[0]}`;
     console.log("Modified-Date:" + modified_date);
     getAUserProfile(pin, modified_date);
-  }
-  else {
+  } else {
     na.innerText = "";
   }
 });
