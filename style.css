@@ -9,8 +9,11 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 #name {
-  color: red;
+  color: rgb(255, 255, 255);
   font-weight: bolder;
+  background-color: red;
+  width: 50%;
+  font-size: 2em;
 }
 #container {
   width: 100%;
@@ -24,12 +27,14 @@ body {
 
 table,
 td,
+tr,
 th {
   padding: 15px;
   border-top: 1px solid black;
   position: relative;
   margin-top: 2%;
-  transition: all 0.15s ease-in-out;
+  transition: all 0.5s linear;
+  /* font-size: 0.8rem; */
 }
 
 table {
@@ -81,9 +86,20 @@ footer {
   width: 100%;
   position: fixed;
   bottom: 0;
-  color: red;
+  color: rgb(0, 0, 0);
   font-weight: bold;
-  background-color: rgba(59, 59, 59, 0.472);
+  background-color: rgba(110, 240, 4, 0.993);
+}
+.source {
+  position: absolute;
+  left: 5%;
+}
+.power {
+  position: relative;
+  left: 80%;
+}
+a {
+  color: rgb(255, 0, 34);
 }
 @media screen and (max-width: 748px) {
   table,
@@ -92,4 +108,11 @@ footer {
     width: 10%;
     overflow-x: auto;
   }
+}
+tr:nth-child(even) {
+  background-color: #5c5a5a5b;
+}
+
+tr:hover {
+  background-color: #f3e631fd;
 }

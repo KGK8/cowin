@@ -7,7 +7,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no"
     />
-    <title>Check Your Nearest Vaccination Center And Slots Availability</title>
+    <title>Document</title>
   </head>
   <link href="./style.css" rel="stylesheet" />
   <body>
@@ -19,13 +19,14 @@
           <form>
             <input type="text" id="pincode" placeholder="PINCODE" required />
             <input type="date" id="date" />
-            <button type="button" id="search">Search</button>
+            <!-- <button type="button" id="search">Search</button> -->
           </form>
         </div>
         <div style="overflow-x: auto">
           <table>
-            <thead>
+            <thead style="background-color: rgba(110, 240, 4, 0.993)">
               <tr>
+                <th>Date</th>
                 <th>Name Of The Vaccination Center</th>
                 <th>Address Of The Vaccination Center</th>
                 <th>Villege/Town/City</th>
@@ -35,22 +36,28 @@
                 <th>No:Of Sessions</th>
                 <th>Vaccine Name</th>
                 <th>Age Limit</th>
-                <th>No:Of Doses</th>
-                <th>No:OF Dose1</th>
-                <th>No:OF Dose2</th>
+                <th>Doses Available</th>
+                <!-- <th>No:OF Dose1</th>
+                <th>No:OF Dose2</th> -->
               </tr>
             </thead>
             <tbody id="tb"></tbody>
           </table>
         </div>
       </div>
-      <footer>
+    </center>
+    <footer>
+      <span class="source"
+        >Source Code On
+        <a href="https://github.com/KGK8/cowin" target="_blank">GitHub</a></span
+      >
+      <span class="power">
         POWERED BY &nbsp;
         <a href="https://apisetu.gov.in/public/api/cowin" target="_blank"
           >APISETU</a
         >
-      </footer>
-    </center>
+      </span>
+    </footer>
   </body>
   <script src="./script.js"></script>
 </html>
