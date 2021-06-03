@@ -145,6 +145,18 @@ a {
   footer {
     display: block;
     height: 8%;
+    font-size: 1em;
+  }
+  #name,
+  #lod {
+    color: rgb(255, 255, 255);
+    font-weight: bolder;
+    background-color: red;
+    width: 50%;
+    font-size: 1.5em;
+    top: 40%;
+    left: 28%;
+    position: absolute;
   }
 }
 tr:nth-child(even) {
