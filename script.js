@@ -29,7 +29,7 @@ const getAUserProfile = (pincod, date) => {
       console.log("No:Of Centers" + typeof result.centers.length);
       if (result.centers.length === 0) {
         console.log("no dAta AvaiL");
-        na.innerText = `No Slots Available For ${pin} At ${date} Please Select Other Date's `;
+        na.innerText = `No Slots Available For ${pin} On ${date} Please Select Other Date's`;
       }
       for (let x = 0; x < result.centers.length; x++) {
         const name_up = result.centers[x].name;
@@ -170,10 +170,14 @@ pincode.addEventListener("input", function () {
     getAUserProfile(pin, modified_date);
   } else {
     na.innerText = "";
+    var Table = document.getElementById("tb");
+    Table.innerHTML = "";
   }
 });
 
 datepic.addEventListener("input", function () {
+  var Table = document.getElementById("tb");
+  Table.innerHTML = "";
   if (pincode.value.length === 6) {
     console.log("change");
     var pin = pincode.value;
@@ -193,6 +197,8 @@ datepic.addEventListener("input", function () {
     getAUserProfile(pin, modified_date);
   } else {
     na.innerText = "";
+    var Table = document.getElementById("tb");
+    Table.innerHTML = "";
   }
 });
 

@@ -14,6 +14,9 @@ body {
   background-color: red;
   width: 50%;
   font-size: 2em;
+  top: 40%;
+  left: 28%;
+  position: absolute;
 }
 #container {
   width: 100%;
@@ -102,11 +105,36 @@ a {
   color: rgb(255, 0, 34);
 }
 @media screen and (max-width: 748px) {
+  #name {
+    color: rgb(255, 255, 255);
+    font-weight: bolder;
+    background-color: red;
+    width: 50%;
+    font-size: 2em;
+    top: 40%;
+    left: 26%;
+    position: absolute;
+  }
   table,
   td,
   th {
     width: 10%;
     overflow-x: auto;
+  }
+  .source {
+    position: absolute;
+    left: 26.5%;
+    bottom: 0;
+    display: block;
+  }
+  .power {
+    position: absolute;
+    left: 28%;
+    bottom: 40%;
+  }
+  footer {
+    display: block;
+    height: 8%;
   }
 }
 tr:nth-child(even) {

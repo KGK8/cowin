@@ -12,7 +12,6 @@
   <link href="./style.css" rel="stylesheet" />
   <body>
     <center>
-      <span id="name"></span>
       <div id="container">
         <h2>Check Your Nearest Vaccination Center And Slots Availability</h2>
         <div class="input">
@@ -23,10 +22,10 @@
           </form>
         </div>
         <div style="overflow-x: auto">
-          <table>
+          <table id="mytable">
             <thead style="background-color: rgba(110, 240, 4, 0.993)">
               <tr>
-                <th>Date</th>
+                <th>Date Selected</th>
                 <th>Name Of The Vaccination Center</th>
                 <th>Address Of The Vaccination Center</th>
                 <th>Villege/Town/City</th>
@@ -45,10 +44,11 @@
           </table>
         </div>
       </div>
+      <span id="name"></span>
     </center>
     <footer>
       <span class="source"
-        >Source Code On
+        >SOURCE CODE @  
         <a href="https://github.com/KGK8/cowin" target="_blank">GitHub</a></span
       >
       <span class="power">
