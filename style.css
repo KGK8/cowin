@@ -8,7 +8,8 @@ body {
   overflow-x: hidden;
   font-family: "Montserrat", sans-serif;
 }
-#name {
+#name,
+#lod {
   color: rgb(255, 255, 255);
   font-weight: bolder;
   background-color: red;
@@ -104,8 +105,13 @@ footer {
 a {
   color: rgb(255, 0, 34);
 }
+#lod {
+  background-color: rgba(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
 @media screen and (max-width: 748px) {
-  #name {
+  #name,
+  #lod {
     color: rgb(255, 255, 255);
     font-weight: bolder;
     background-color: red;
@@ -114,6 +120,10 @@ a {
     top: 40%;
     left: 26%;
     position: absolute;
+  }
+  #lod {
+    background-color: rgba(255, 255, 255);
+    color: rgb(0, 0, 0);
   }
   table,
   td,
@@ -143,4 +153,9 @@ tr:nth-child(even) {
 
 tr:hover {
   background-color: #f3e631fd;
+}
+.lod {
+  color: red;
+  position: relative;
+  left: 40%;
 }

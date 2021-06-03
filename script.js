@@ -2,6 +2,7 @@ const pincode = document.getElementById("pincode");
 const datepic = document.getElementById("date");
 const search = document.getElementById("search");
 const na = document.getElementById("name");
+const lo = document.getElementById("lod");
 const container = document.getElementById("tb");
 var today = new Date();
 console.log(today.toLocaleDateString("en-US"));
@@ -14,6 +15,12 @@ const getAUserProfile = (pincod, date) => {
     pin +
     "&date=" +
     date;
+
+  // var Table = document.getElementById("tb");
+  // let loader = '<h1 class="lod">Loading</h1>';
+  // Table.innerHTML = loader;
+  lo.innerText = "Loading";
+
   return fetch(api)
     .then((response) => {
       if (response.status !== 200) {
@@ -31,6 +38,9 @@ const getAUserProfile = (pincod, date) => {
         console.log("no dAta AvaiL");
         na.innerText = `No Slots Available For ${pin} On ${date} Please Select Other Date's`;
       }
+      // Table.innerHTML = "";
+      lo.innerText = "";
+
       for (let x = 0; x < result.centers.length; x++) {
         const name_up = result.centers[x].name;
         const address_uphc = result.centers[x].address;
