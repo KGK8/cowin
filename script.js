@@ -6,7 +6,7 @@ const lo = document.getElementById("lod");
 const container = document.getElementById("tb");
 var today = new Date();
 
-const getAUserProfile = (pincod, date) => {
+const getVaccineData = (pincod, date) => {
   var pin = pincod;
   var date = date;
 
@@ -59,7 +59,7 @@ const getAUserProfile = (pincod, date) => {
             state_name,
             fee_ty,
           ];
-
+          // res.sort();
           for (let m = 0; m < res.length; m++) {
             var dup = res[m] + "span";
             var dupdata = res[m] + "van";
@@ -96,15 +96,13 @@ const getAUserProfile = (pincod, date) => {
   );
 };
 
-{
-  var auto_date = today.toISOString();
-  var mod_auto_date = auto_date.split("-");
-  var auto_year = mod_auto_date[0];
-  var auto_month = mod_auto_date[1];
-  var auto_day = mod_auto_date[2].split("");
-  var mod_auto_date = auto_day[0] + auto_day[1];
-  var final_auto_date = `${auto_year}-${auto_month}-${mod_auto_date}`;
-}
+var auto_date = today.toISOString();
+var mod_auto_date = auto_date.split("-");
+var auto_year = mod_auto_date[0];
+var auto_month = mod_auto_date[1];
+var auto_day = mod_auto_date[2].split("");
+var mod_auto_date = auto_day[0] + auto_day[1];
+var final_auto_date = `${auto_year}-${auto_month}-${mod_auto_date}`;
 
 pincode.addEventListener("input", function () {
   if (pincode.value.length === 6) {
@@ -122,7 +120,7 @@ pincode.addEventListener("input", function () {
     var date_spli = dat.split("-");
     var modified_date = `${date_spli[2]}-${date_spli[1]}-${date_spli[0]}`;
     console.log("Modified-Date:" + modified_date);
-    getAUserProfile(pin, modified_date);
+    getVaccineData(pin, modified_date);
   } else {
     na.innerText = "";
     var Table = document.getElementById("tb");
@@ -149,10 +147,12 @@ datepic.addEventListener("input", function () {
     var date_spli = dat.split("-");
     var modified_date = `${date_spli[2]}-${date_spli[1]}-${date_spli[0]}`;
     console.log("Modified-Date:" + modified_date);
-    getAUserProfile(pin, modified_date);
+    getVaccineData(pin, modified_date);
   } else {
     na.innerText = "";
     var Table = document.getElementById("tb");
     Table.innerHTML = "";
   }
 });
+
+

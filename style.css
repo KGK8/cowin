@@ -33,7 +33,7 @@ table,
 td,
 tr,
 th {
-  padding: 15px;
+  padding: 10px;
   border-top: 1px solid black;
   position: relative;
   margin-top: 2%;
@@ -42,7 +42,8 @@ th {
 }
 
 table {
-  width: 100%;
+  width: 99%;
+  transition: all 0.5s linear;
   border-collapse: collapse;
 }
 #pincode {
@@ -89,8 +90,8 @@ button {
 footer {
   width: 100%;
   position: fixed;
-  bottom: 0;
   color: rgb(0, 0, 0);
+  bottom: 0;
   font-weight: bold;
   background-color: rgba(4, 240, 228, 0.993);
 }
@@ -133,19 +134,19 @@ a {
   }
   .source {
     position: absolute;
-    left: 26.5%;
+    left: 27.5%;
     bottom: 0;
     display: block;
   }
   .power {
     position: absolute;
-    left: 28%;
+    left: 29%;
     bottom: 40%;
   }
   footer {
     display: block;
-    height: 8%;
-    font-size: 1em;
+    height: 6%;
+    font-size: 0.9em;
   }
   #name,
   #lod {
