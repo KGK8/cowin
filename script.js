@@ -155,4 +155,119 @@ datepic.addEventListener("input", function () {
   }
 });
 
+//
+//
+//
+//
+//
+//
 
+var stateList = document.getElementById("stateList");
+var districtList = document.getElementById("district");
+var Table = document.getElementById("tb");
+
+districtList.disabled = true;
+fetch("https://cdn-api.co-vin.in/api/v2/admin/location/states")
+  .then((res) => res.json())
+  .then((data) => {
+    Table.innerHTML = "";
+    na.innerText = "";
+
+    for (let z = 0; z < data.states.length; z++) {
+      var option = document.createElement("option");
+      option.text = data.states[z].state_name;
+      option.value = data.states[z].state_id;
+      stateList.add(option);
+    }
+
+    // console.table(data.states);
+  });
+
+stateList.addEventListener("change", function () {
+  districtList.innerText = "";
+  Table.innerHTML = "";
+
+  var stateCode = stateList.value;
+  fetch(
+    `https://cdn-api.co-vin.in/api/v2/admin/location/districts/${stateCode}`,
+  )
+    .then((response) => response.json())
+    .then((fetchDistricts) => {
+      districtList.disabled = false;
+      var option = document.createElement("option");
+      option.text = "Select District";
+      option.value = "Null";
+      districtList.add(option);
+      console.log(`Total No Of States - ${fetchDistricts.districts.length}`);
+      for (let l = 0; l < fetchDistricts.districts.length; l++) {
+        var option = document.createElement("option");
+        option.text = fetchDistricts.districts[l].district_name;
+        option.value = fetchDistricts.districts[l].district_id;
+        districtList.add(option);
+      }
+    });
+});
+
+districtList.addEventListener("change", function () {
+  var districtCode = districtList.value;
+  Table.innerHTML = "";
+  lo.innerText = "Loading";
+
+  console.log(districtCode);
+  fetch(
+    `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${districtCode}&date=16-06-2021`,
+  )
+    .then((res) => res.json())
+    .then((vaccinationCentersData) => {
+      lo.innerText = "";
+      na.innerText = "";
+      console.table(vaccinationCentersData.sessions.length);
+
+      console.table(vaccinationCentersData.sessions[0]);
+      for (let m = 0; m < vaccinationCentersData.sessions.length; m++) {
+        var short = vaccinationCentersData.sessions[m];
+
+        var date = short.date;
+        var centerName = short.name;
+        var centerAddress = short.address;
+        var blockName = short.block_name;
+        var districtName = short.district_name;
+        var stateName = short.state_name;
+        var feeType = short.fee_type;
+        var vaccineSessions = "-";
+        var vaccineName = short.vaccine;
+        var ageLimit = short.min_age_limit;
+        var dosesAvailable = short.available_capacity;
+
+        const newDiv = document.createElement("tr");
+        newDiv.classList.add("pannel");
+
+        // console.log(centerName);
+
+        // Make Data InTo Array
+        var fetchdata = [
+          date,
+          centerName,
+          centerAddress,
+          blockName,
+          districtName,
+          stateName,
+          feeType,
+          vaccineSessions,
+          vaccineName,
+          ageLimit,
+          dosesAvailable,
+        ];
+        for (let v = 0; v < fetchdata.length; v++) {
+          var dup = fetchdata[v] + "span";
+          var dupdata = fetchdata[v] + "van";
+
+          var dup = document.createElement("th");
+          newDiv.appendChild(dup);
+          var dupdata = document.createTextNode(fetchdata[v]);
+          dup.appendChild(dupdata);
+        }
+        container.append(newDiv);
+      }
+    });
+});
