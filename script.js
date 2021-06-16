@@ -121,6 +121,7 @@ pincode.addEventListener("input", function () {
     var modified_date = `${date_spli[2]}-${date_spli[1]}-${date_spli[0]}`;
     console.log("Modified-Date:" + modified_date);
     getVaccineData(pin, modified_date);
+    getVaccineDataByState(modified_date);
   } else {
     na.innerText = "";
     var Table = document.getElementById("tb");
@@ -167,6 +168,7 @@ var districtList = document.getElementById("district");
 var Table = document.getElementById("tb");
 
 districtList.disabled = true;
+
 fetch("https://cdn-api.co-vin.in/api/v2/admin/location/states")
   .then((res) => res.json())
   .then((data) => {
@@ -211,19 +213,18 @@ stateList.addEventListener("change", function () {
 districtList.addEventListener("change", function () {
   var districtCode = districtList.value;
   Table.innerHTML = "";
-  lo.innerText = "Loading";
-
+  var dat = datepic.value || final_auto_date;
+  var date_spli = dat.split("-");
+  var modified_date = `${date_spli[2]}-${date_spli[1]}-${date_spli[0]}`;
   console.log(districtCode);
   fetch(
-    `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${districtCode}&date=16-06-2021`,
+    `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${districtCode}&date=${modified_date}`,
   )
     .then((res) => res.json())
     .then((vaccinationCentersData) => {
       lo.innerText = "";
       na.innerText = "";
-      console.table(vaccinationCentersData.sessions.length);
 
-      console.table(vaccinationCentersData.sessions[0]);
       for (let m = 0; m < vaccinationCentersData.sessions.length; m++) {
         var short = vaccinationCentersData.sessions[m];
 
