@@ -4,6 +4,8 @@ const search = document.getElementById("search");
 const na = document.getElementById("name");
 const lo = document.getElementById("lod");
 const container = document.getElementById("tb");
+const tabel = document.getElementById("mytable");
+tabel.style.display = "none";
 var today = new Date();
 
 search.style.display = "none";
@@ -24,6 +26,7 @@ const getVaccineData = (pincod, date) => {
       // Status Code
       .then((response) => {
         if (response.status !== 200) {
+          tabel.style.display = "none";
           na.innerText = "Please Select Valied Pincode";
           lo.innerText = "";
         } else {
@@ -37,9 +40,11 @@ const getVaccineData = (pincod, date) => {
         if (result.centers.length === 0) {
           console.log("no dAta AvaiL");
           na.innerText = `No Slots Available For ${pin} On ${date} Please Select Other Date's`;
+          tabel.style.display = "none";
         }
 
         lo.innerText = "";
+        tabel.style.display = "none";
 
         for (let x = 0; x < result.centers.length; x++) {
           const name_up = result.centers[x].name;
@@ -93,6 +98,7 @@ const getVaccineData = (pincod, date) => {
             dup.appendChild(dupdata);
           }
           container.append(newDiv);
+          tabel.style.display = "";
         }
       })
   );
@@ -112,6 +118,7 @@ pincode.addEventListener("input", function () {
     var pin = pincode.value;
     if (pin === "") {
       na.innerText = "Please Provide PinCode";
+      tabel.style.display = "none";
       return;
     }
 
@@ -128,6 +135,7 @@ pincode.addEventListener("input", function () {
     na.innerText = "";
     var Table = document.getElementById("tb");
     Table.innerHTML = "";
+    tabel.style.display = "none";
   }
 });
 
@@ -274,6 +282,7 @@ districtList.addEventListener("change", function () {
           dup.appendChild(dupdata);
         }
         container.append(newDiv);
+        tabel.style.display = "";
       }
       search.style.display = "";
 
