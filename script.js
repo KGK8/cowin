@@ -5,7 +5,9 @@ const na = document.getElementById("name");
 const lo = document.getElementById("lod");
 const container = document.getElementById("tb");
 const tabel = document.getElementById("mytable");
+var countCenters = document.getElementById("testdata");
 tabel.style.display = "none";
+countCenters.style.display = "none";
 var today = new Date();
 
 search.style.display = "none";
@@ -45,6 +47,7 @@ const getVaccineData = (pincod, date) => {
 
         lo.innerText = "";
         tabel.style.display = "none";
+        countCenters.style.display = "none";
 
         for (let x = 0; x < result.centers.length; x++) {
           const name_up = result.centers[x].name;
@@ -113,12 +116,14 @@ var mod_auto_date = auto_day[0] + auto_day[1];
 var final_auto_date = `${auto_year}-${auto_month}-${mod_auto_date}`;
 
 pincode.addEventListener("input", function () {
+  countCenters.style.display = "none";
   if (pincode.value.length === 6) {
     console.log("change");
     var pin = pincode.value;
     if (pin === "") {
       na.innerText = "Please Provide PinCode";
       tabel.style.display = "none";
+      countCenters.style.display = "none";
       return;
     }
 
@@ -196,8 +201,11 @@ fetch("https://cdn-api.co-vin.in/api/v2/admin/location/states")
   });
 
 stateList.addEventListener("change", function () {
+  lo.innerText = "Loading";
+  tabel.style.display = "none";
   districtList.innerText = "";
   Table.innerHTML = "";
+  countCenters.style.display = "none";
   search.style.display = "none";
 
   var stateCode = stateList.value;
@@ -206,6 +214,7 @@ stateList.addEventListener("change", function () {
   )
     .then((response) => response.json())
     .then((fetchDistricts) => {
+      lo.innerText = "";
       districtList.disabled = false;
       var option = document.createElement("option");
       option.text = "Select District";
@@ -223,6 +232,7 @@ stateList.addEventListener("change", function () {
 
 districtList.addEventListener("change", function () {
   var districtCode = districtList.value;
+  lo.innerText = "Loading";
   Table.innerHTML = "";
   var dat = datepic.value || final_auto_date;
   var date_spli = dat.split("-");
@@ -238,6 +248,9 @@ districtList.addEventListener("change", function () {
       console.log(
         "Vaccination Centes is" + vaccinationCentersData.sessions.length,
       );
+      var countCentersVal = vaccinationCentersData.sessions.length;
+      countCenters.innerText = `Total Number Of Vaccination Centers Is - ${countCentersVal}`;
+      countCenters.style.display = "";
 
       for (let m = 0; m < vaccinationCentersData.sessions.length; m++) {
         var short = vaccinationCentersData.sessions[m];
