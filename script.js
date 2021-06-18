@@ -201,7 +201,7 @@ fetch("https://cdn-api.co-vin.in/api/v2/admin/location/states")
   });
 
 stateList.addEventListener("change", function () {
-  lo.innerText = "Loading";
+  lo.innerText = "Loading District";
   tabel.style.display = "none";
   districtList.innerText = "";
   Table.innerHTML = "";
@@ -232,7 +232,7 @@ stateList.addEventListener("change", function () {
 
 districtList.addEventListener("change", function () {
   var districtCode = districtList.value;
-  lo.innerText = "Loading";
+  lo.innerText = "Loading Vaccination Centers Data";
   Table.innerHTML = "";
   var dat = datepic.value || final_auto_date;
   var date_spli = dat.split("-");
