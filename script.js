@@ -6,6 +6,8 @@ const lo = document.getElementById("lod");
 const container = document.getElementById("tb");
 var today = new Date();
 
+search.style.display = "none";
+
 const getVaccineData = (pincod, date) => {
   var pin = pincod;
   var date = date;
@@ -64,7 +66,7 @@ const getVaccineData = (pincod, date) => {
             var dup = res[m] + "span";
             var dupdata = res[m] + "van";
 
-            var dup = document.createElement("th");
+            var dup = document.createElement("td");
             newDiv.appendChild(dup);
             var dupdata = document.createTextNode(res[m]);
             dup.appendChild(dupdata);
@@ -85,7 +87,7 @@ const getVaccineData = (pincod, date) => {
           for (let m = 0; m < sess_data.length; m++) {
             var dup = sess_data[m] + "span";
             var dupdata = sess_data[m] + "van";
-            var dup = document.createElement("th");
+            var dup = document.createElement("td");
             newDiv.appendChild(dup);
             var dupdata = document.createTextNode(sess_data[m]);
             dup.appendChild(dupdata);
@@ -188,6 +190,7 @@ fetch("https://cdn-api.co-vin.in/api/v2/admin/location/states")
 stateList.addEventListener("change", function () {
   districtList.innerText = "";
   Table.innerHTML = "";
+  search.style.display = "none";
 
   var stateCode = stateList.value;
   fetch(
@@ -224,10 +227,12 @@ districtList.addEventListener("change", function () {
     .then((vaccinationCentersData) => {
       lo.innerText = "";
       na.innerText = "";
+      console.log(
+        "Vaccination Centes is" + vaccinationCentersData.sessions.length,
+      );
 
       for (let m = 0; m < vaccinationCentersData.sessions.length; m++) {
         var short = vaccinationCentersData.sessions[m];
-
         var date = short.date;
         var centerName = short.name;
         var centerAddress = short.address;
@@ -263,12 +268,38 @@ districtList.addEventListener("change", function () {
           var dup = fetchdata[v] + "span";
           var dupdata = fetchdata[v] + "van";
 
-          var dup = document.createElement("th");
+          var dup = document.createElement("td");
           newDiv.appendChild(dup);
           var dupdata = document.createTextNode(fetchdata[v]);
           dup.appendChild(dupdata);
         }
         container.append(newDiv);
       }
+      search.style.display = "";
+
+      // Search
     });
 });
+search.addEventListener("input", function search() {
+  const search = document.getElementById("search");
+
+  filter = search.value.toUpperCase();
+  console.log(filter);
+  table = document.getElementById("mytable");
+  tr = table.getElementsByTagName("tr");
+  console.log("Table Length-" + tr.length);
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[3];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+        td.style.backgroundColor = "#1d85ec";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+});
+
+// Filter Ends
