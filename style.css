@@ -8,6 +8,25 @@ body {
   overflow-x: hidden;
   font-family: "Montserrat", sans-serif;
 }
+#filter {
+  display: block;
+  left: 40%;
+  position: relative;
+  cursor: pointer;
+}
+.viewFilters {
+  transition: display 0.5s linear;
+  margin-top: 5px;
+  display: none;
+}
+.viewFilters button {
+  cursor: pointer;
+}
+.view {
+  transition: display 0.5s linear;
+  margin-top: 5px;
+  display: block;
+}
 #testdata {
   display: block;
   margin-top: 10px;
@@ -149,6 +168,13 @@ select {
   select {
     width: 59%;
     height: 10%;
+  }
+  #testdata {
+    width: 80%;
+  }
+  .viewFilters button {
+    cursor: pointer;
+    margin-top: 5px;
   }
   #name,
   #lod {

@@ -6,7 +6,11 @@ const lo = document.getElementById("lod");
 const container = document.getElementById("tb");
 const tabel = document.getElementById("mytable");
 var countCenters = document.getElementById("testdata");
+var filterButton = document.getElementById("filter");
+var viewFilters = document.getElementById("viewFilters");
 tabel.style.display = "none";
+filterButton.style.display = "none";
+// viewFilters.style.display = "none";
 countCenters.style.display = "none";
 var today = new Date();
 
@@ -48,6 +52,7 @@ const getVaccineData = (pincod, date) => {
         lo.innerText = "";
         tabel.style.display = "none";
         countCenters.style.display = "none";
+        filterButton.style.display = "";
 
         for (let x = 0; x < result.centers.length; x++) {
           const name_up = result.centers[x].name;
@@ -230,13 +235,13 @@ stateList.addEventListener("change", function () {
     });
 });
 
+var dat = datepic.value || final_auto_date;
+var date_spli = dat.split("-");
+var modified_date = `${date_spli[2]}-${date_spli[1]}-${date_spli[0]}`;
 districtList.addEventListener("change", function () {
   var districtCode = districtList.value;
   lo.innerText = "Loading Vaccination Centers Data";
   Table.innerHTML = "";
-  var dat = datepic.value || final_auto_date;
-  var date_spli = dat.split("-");
-  var modified_date = `${date_spli[2]}-${date_spli[1]}-${date_spli[0]}`;
   console.log(districtCode);
   fetch(
     `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${districtCode}&date=${modified_date}`,
@@ -245,10 +250,14 @@ districtList.addEventListener("change", function () {
     .then((vaccinationCentersData) => {
       lo.innerText = "";
       na.innerText = "";
+      filterButton.style.display = "";
+
       console.log(
         "Vaccination Centes is" + vaccinationCentersData.sessions.length,
       );
       var countCentersVal = vaccinationCentersData.sessions.length;
+      var districtName = districtList.innerHTML;
+      console.log("zzzzzzzzzzzzzzz" + districtName);
       countCenters.innerText = `Total Number Of Vaccination Centers Is - ${countCentersVal}`;
       countCenters.style.display = "";
 
@@ -302,14 +311,11 @@ districtList.addEventListener("change", function () {
       // Search
     });
 });
+const table = document.getElementById("mytable");
+const tr = table.getElementsByTagName("tr");
 search.addEventListener("input", function search() {
   const search = document.getElementById("search");
-
   filter = search.value.toUpperCase();
-  console.log(filter);
-  table = document.getElementById("mytable");
-  tr = table.getElementsByTagName("tr");
-  console.log("Table Length-" + tr.length);
   for (i = 0; i < tr.length; i++) {
     td = tr[i].getElementsByTagName("td")[3];
     if (td) {
@@ -325,3 +331,94 @@ search.addEventListener("input", function search() {
 });
 
 // Filter Ends
+
+// Global Filters
+filterButton.addEventListener("click", function () {
+  console.log("clicked");
+  viewFilters.classList.toggle("view");
+});
+
+function startFilter(filterValue) {
+  var filterreqVal = filterValue.value;
+  filter = filterreqVal.toUpperCase();
+  console.log(filter);
+  if (filter == 18) {
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[9];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+          td.style.backgroundColor = "#1d85ec";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  } else if (filter == "COVAXIN") {
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[8];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+          td.style.backgroundColor = "#1d85ec";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  } else if (filter == "COVISHIELD") {
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[8];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+          td.style.backgroundColor = "#1d85ec";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  } else if (filter == "SPUTNIK V") {
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[8];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+          td.style.backgroundColor = "#1d85ec";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  } else if (filter == "FREE") {
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[6];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+          td.style.backgroundColor = "#1d85ec";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  } else if (filter == "ALL") {
+    filter = modified_date;
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+}

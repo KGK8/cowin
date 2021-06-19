@@ -14,6 +14,39 @@
     <center>
       <div id="container">
         <h2>Check Your Nearest Vaccination Center And Slots Availability</h2>
+        <span><button class="filters" id="filter">Filters</button></span>
+        <div id="viewFilters" class="viewFilters">
+          <button value="18" id="filterAge" onclick="startFilter(this)">
+            18+
+          </button>
+          <button
+            value="covaxin"
+            id="filterCovaxin"
+            onclick="startFilter(this)"
+          >
+            Covaxin
+          </button>
+          <button
+            value="covishield"
+            id="filtercovishield"
+            onclick="startFilter(this)"
+          >
+            Covishield
+          </button>
+          <button
+            value="sputnik V"
+            id="filtersputnikV"
+            onclick="startFilter(this)"
+          >
+            Sputnik V
+          </button>
+          <button value="Free" id="feeFree" onclick="startFilter(this)">
+            Free
+          </button>
+          <button value="All" id="showAll" onclick="startFilter(this)">
+            Show All
+          </button>
+        </div>
         <div class="input">
           <form>
             <h4 style="color: red">
